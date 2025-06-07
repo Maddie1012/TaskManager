@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { load, save, TASKS_KEY, USERS_KEY } from '../storage.js'
 
-const STATUS = ['To Do', 'In Progress', 'Done']
+const STATUS = ['К выполнению', 'В процессе', 'Выполнено']
 
 export default function TaskList({ project, user, users }) {
   const [tasks, setTasks] = useState(load(TASKS_KEY, []).filter(t => t.projectId === project.id))
@@ -13,7 +13,7 @@ export default function TaskList({ project, user, users }) {
 
   function createTask(e) {
     e.preventDefault()
-    const newTask = { id: Date.now(), projectId: project.id, title: form.title, description: form.description, dueDate: form.dueDate, assignedTo: Number(form.assignedTo), status: 'To Do' }
+    const newTask = { id: Date.now(), projectId: project.id, title: form.title, description: form.description, dueDate: form.dueDate, assignedTo: Number(form.assignedTo), status: 'К выполнению' }
     const updatedAll = load(TASKS_KEY, [])
     const updated = [...updatedAll, newTask]
     save(TASKS_KEY, updated)
@@ -42,15 +42,15 @@ export default function TaskList({ project, user, users }) {
 
   return (
     <div>
-      <h4>Tasks for {project.title}</h4>
+      <h4>Задачи для {project.title}</h4>
       <ul>
         {tasks.map(t => (
           <li key={t.id}>
             <div>
-              <strong>{t.title}</strong> - {t.description} (due {t.dueDate}) assigned to {users.find(u => u.id === t.assignedTo)?.name || 'Unassigned'} - status: {t.status}
+              <strong>{t.title}</strong> - {t.description} (Дедлайн {t.dueDate}) назначен для {users.find(u => u.id === t.assignedTo)?.name || 'Unassigned'} - Статус: {t.status}
             </div>
             {user.role === 'teamlead' && user.id === project.leadId && (
-              <button onClick={() => removeTask(t.id)}>Delete</button>
+              <button onClick={() => removeTask(t.id)}>Удалить</button>
             )}
             {(user.role !== 'teamlead' && user.id === t.assignedTo) && (
               <select value={t.status} onChange={e => updateStatus(t.id, e.target.value)}>
@@ -62,11 +62,11 @@ export default function TaskList({ project, user, users }) {
       </ul>
       {user.role === 'teamlead' && user.id === project.leadId && (
         <form onSubmit={createTask}>
-          <input name="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-          <input name="description" placeholder="Description" value={form.description} onChange={handleChange} required />
+          <input name="title" placeholder="Название" value={form.title} onChange={handleChange} required />
+          <input name="description" placeholder="Описание" value={form.description} onChange={handleChange} required />
           <input type="date" name="dueDate" value={form.dueDate} onChange={handleChange} required />
           <select name="assignedTo" value={form.assignedTo} onChange={handleChange} required>
-            <option value="">Assign to...</option>
+            <option value="">Назначить для...</option>
             {users.filter(u => u.role !== 'teamlead').map(u => (
               <option key={u.id} value={u.id}>{u.name}</option>
             ))}
@@ -76,7 +76,7 @@ export default function TaskList({ project, user, users }) {
       )}
       {user.role === 'teamlead' && user.id === project.leadId && (
         <div>
-          <h5>Report</h5>
+          <h5>Отчет</h5>
           <ul>
             {summary.map(s => (
               <li key={s.status}>{s.status}: {s.count}</li>

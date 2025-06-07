@@ -25,7 +25,10 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center'
+    }}>
       {user ? (
         <Dashboard user={user} onLogout={handleLogout} />
       ) : (

@@ -14,8 +14,8 @@ export default function Dashboard({ user, onLogout }) {
 
   return (
     <div>
-      <h2>Hello, {user.name} ({user.role})</h2>
-      <button onClick={() => { save(CURRENT_USER_KEY, null); onLogout() }}>Logout</button>
+      <h2>Привет, {user.name} ({user.role})</h2>
+      <button onClick={() => { save(CURRENT_USER_KEY, null); onLogout() }}>Выйти</button>
       <ProjectList user={user} projects={projects} users={users} onAdd={addProject} />
     </div>
   )

@@ -21,7 +21,7 @@ export default function ProjectList({ user, projects, users, onAdd }) {
 
   return (
     <div>
-      <h3>Projects</h3>
+      <h3>Проекты</h3>
       <ul>
         {projects.map(p => (
           <li key={p.id}>
@@ -31,9 +31,9 @@ export default function ProjectList({ user, projects, users, onAdd }) {
       </ul>
       {user.role === 'teamlead' && (
         <form onSubmit={createProject}>
-          <input name="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-          <input name="description" placeholder="Description" value={form.description} onChange={handleChange} required />
-          <button type="submit">Add Project</button>
+          <input name="title" placeholder="Название" value={form.title} onChange={handleChange} required />
+          <input name="description" placeholder="Описание" value={form.description} onChange={handleChange} required />
+          <button type="submit">Добавить проект</button>
         </form>
       )}
       {selected && <TaskList project={selected} user={user} users={users} />}

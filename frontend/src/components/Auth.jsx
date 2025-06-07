@@ -16,14 +16,14 @@ export default function Auth({ onAuth }) {
       save(CURRENT_USER_KEY, user.id)
       onAuth(user)
     } else {
-      alert('Invalid credentials')
+      alert('Неверные данные')
     }
   }
 
   function register() {
     const users = load(USERS_KEY, [])
     if (users.some(u => u.email === form.email)) {
-      alert('User already exists')
+      alert('Пользователь с таким email уже существует')
       return
     }
     const newUser = { id: Date.now(), email: form.email, password: form.password, name: form.name, role: form.role }
@@ -40,33 +40,35 @@ export default function Auth({ onAuth }) {
   }
 
   return (
-    <div>
-      <h2>{isLogin ? 'Login' : 'Register'}</h2>
+    <div style={{
+
+    }}>
+      <h2>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+          <input name="email" placeholder="Почта" value={form.email} onChange={handleChange} required />
         </div>
         <div>
-          <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+          <input type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} required />
         </div>
         {!isLogin && (
           <>
             <div>
-              <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+              <input name="name" placeholder="Имя" value={form.name} onChange={handleChange} required />
             </div>
             <div>
               <select name="role" value={form.role} onChange={handleChange}>
-                <option value="teamlead">Team Lead</option>
-                <option value="developer">Developer</option>
-                <option value="tester">Tester</option>
+                <option value="teamlead">Тимлид</option>
+                <option value="developer">Разработчик</option>
+                <option value="tester">Тестировщик</option>
               </select>
             </div>
           </>
         )}
-        <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
+        <button type="submit">{isLogin ? 'Войти' : 'Зарегистрироваться'}</button>
       </form>
       <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
+        {isLogin ? 'Нет аккаунта? Регистрация' : 'Уже есть аккаунт? Войти'}
       </button>
     </div>
   )
