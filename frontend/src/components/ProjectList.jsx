@@ -29,7 +29,7 @@ export default function ProjectList({ user, projects, users, onAdd }) {
           </li>
         ))}
       </ul>
-      {user.role === 'teamlead' && (
+      {user.role === 'Руководитель проекта' && (
         <form onSubmit={createProject}>
           <input name="title" placeholder="Название" value={form.title} onChange={handleChange} required />
           <input name="description" placeholder="Описание" value={form.description} onChange={handleChange} required />

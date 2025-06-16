@@ -3,7 +3,7 @@ import { load, save, USERS_KEY, CURRENT_USER_KEY } from '../storage.js'
 
 export default function Auth({ onAuth }) {
   const [isLogin, setIsLogin] = useState(true)
-  const [form, setForm] = useState({ email: '', password: '', name: '', role: 'developer' })
+  const [form, setForm] = useState({ email: '', password: '', name: '', role: 'Разработчик' })
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -58,9 +58,9 @@ export default function Auth({ onAuth }) {
             </div>
             <div>
               <select name="role" value={form.role} onChange={handleChange}>
-                <option value="teamlead">Тимлид</option>
-                <option value="developer">Разработчик</option>
-                <option value="tester">Тестировщик</option>
+                <option value="Руководитель проекта">Руководитель проекта</option>
+                <option value="Разработчик">Разработчик</option>
+                <option value="Тестировщик">Тестировщик</option>
               </select>
             </div>
           </>

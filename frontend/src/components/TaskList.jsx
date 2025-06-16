@@ -49,10 +49,10 @@ export default function TaskList({ project, user, users }) {
             <div>
               <strong>{t.title}</strong> - {t.description} (Дедлайн {t.dueDate}) назначен для {users.find(u => u.id === t.assignedTo)?.name || 'Unassigned'} - Статус: {t.status}
             </div>
-            {user.role === 'teamlead' && user.id === project.leadId && (
+            {user.role === 'Руководитель проекта' && user.id === project.leadId && (
               <button onClick={() => removeTask(t.id)}>Удалить</button>
             )}
-            {(user.role !== 'teamlead' && user.id === t.assignedTo) && (
+            {(user.role !== 'Руководитель проекта' && user.id === t.assignedTo) && (
               <select value={t.status} onChange={e => updateStatus(t.id, e.target.value)}>
                 {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
@@ -60,21 +60,21 @@ export default function TaskList({ project, user, users }) {
           </li>
         ))}
       </ul>
-      {user.role === 'teamlead' && user.id === project.leadId && (
+      {user.role === 'Руководитель проекта' && user.id === project.leadId && (
         <form onSubmit={createTask}>
           <input name="title" placeholder="Название" value={form.title} onChange={handleChange} required />
           <input name="description" placeholder="Описание" value={form.description} onChange={handleChange} required />
           <input type="date" name="dueDate" value={form.dueDate} onChange={handleChange} required />
           <select name="assignedTo" value={form.assignedTo} onChange={handleChange} required>
             <option value="">Назначить для...</option>
-            {users.filter(u => u.role !== 'teamlead').map(u => (
+            {users.filter(u => u.role !== 'Руководитель проекта').map(u => (
               <option key={u.id} value={u.id}>{u.name}</option>
             ))}
           </select>
           <button type="submit">Add Task</button>
         </form>
       )}
-      {user.role === 'teamlead' && user.id === project.leadId && (
+      {user.role === 'Руководитель проекта' && user.id === project.leadId && (
         <div>
           <h5>Отчет</h5>
           <ul>
