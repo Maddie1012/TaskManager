@@ -71,7 +71,7 @@ export default function TaskList({ project, user, users }) {
               <option key={u.id} value={u.id}>{u.name}</option>
             ))}
           </select>
-          <button type="submit">Add Task</button>
+          <button type="submit">Добавить задачу</button>
         </form>
       )}
       {user.role === 'Руководитель проекта' && user.id === project.leadId && (
