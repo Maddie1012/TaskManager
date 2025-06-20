@@ -41,23 +41,34 @@ export default function Auth({ onAuth }) {
 
   return (
     <div style={{
-
+        width: '100%',
+        maxWidth: '250px',
     }}>
-      <h2>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+      <h2 style={{
+        textAlign: 'center',
+      }}>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <input name="email" placeholder="Почта" value={form.email} onChange={handleChange} required />
+          <input style={{
+            width: '-webkit-fill-available',
+          }} name="email" placeholder="Почта" value={form.email} onChange={handleChange} required />
         </div>
         <div>
-          <input type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} required />
+          <input style={{
+            width: '-webkit-fill-available',
+          }} type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} required />
         </div>
         {!isLogin && (
           <>
             <div>
-              <input name="name" placeholder="Имя" value={form.name} onChange={handleChange} required />
+              <input style={{
+                width: '-webkit-fill-available',
+              }} name="name" placeholder="Имя" value={form.name} onChange={handleChange} required />
             </div>
             <div>
-              <select name="role" value={form.role} onChange={handleChange}>
+              <select style={{
+                width: '-webkit-fill-available',
+              }} name="role" value={form.role} onChange={handleChange}>
                 <option value="Руководитель проекта">Руководитель проекта</option>
                 <option value="Разработчик">Разработчик</option>
                 <option value="Тестировщик">Тестировщик</option>
@@ -67,7 +78,9 @@ export default function Auth({ onAuth }) {
         )}
         <button type="submit">{isLogin ? 'Войти' : 'Зарегистрироваться'}</button>
       </form>
-      <button onClick={() => setIsLogin(!isLogin)}>
+      <button style={{
+        width: '-webkit-fill-available',
+      }} onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? 'Нет аккаунта? Регистрация' : 'Уже есть аккаунт? Войти'}
       </button>
     </div>
