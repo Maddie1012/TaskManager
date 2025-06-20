@@ -43,6 +43,7 @@ export default function Auth({ onAuth }) {
     <div style={{
         width: '100%',
         maxWidth: '250px',
+        marginTop: '150px',
     }}>
       <h2 style={{
         textAlign: 'center',

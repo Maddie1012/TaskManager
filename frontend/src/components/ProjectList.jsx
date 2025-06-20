@@ -26,6 +26,7 @@ export default function ProjectList({ user, projects, users, onAdd }) {
         {projects.map(p => (
           <li key={p.id}>
             <button onClick={() => setSelected(p)}>{p.title}</button>
+            <p>{p.description}</p>
           </li>
         ))}
       </ul>
